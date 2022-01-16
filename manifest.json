@@ -1,0 +1,21 @@
+{
+	"manifest_version": 2,
+	"name": "Sitecore Content Hub Extension",
+	"description": "This extension provide addition shortcuts for manipulating with Sitecore Content Hub. Visit https://www.sitecore.com/products/content-hub",
+	"version": "2.0",
+	"author": "Review by GGO",
+	"browser_action": {
+		"default_icon": "src/icon.png",
+		"default_popup": "src/index.html"
+	},
+	"permissions": [
+		"activeTab",
+		"tabs",
+		"<all_urls>"
+	],
+	"icons": {
+		"16": "src/icon_16.png",
+		"48": "src/icon_48.png",
+		"128": "src/icon_128.png"
+	}
+}

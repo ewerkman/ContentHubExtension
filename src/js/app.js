@@ -49,6 +49,9 @@ document.addEventListener('DOMContentLoaded', function () {
     var editPage = document.getElementById("editPage");
     editPage.addEventListener("click", BaseFunction(EditPage));
 
+    var toggleImportCheckboxes = document.getElementById("toggleImportCheckboxes");
+    toggleImportCheckboxes.addEventListener("click", BaseFunction(ToggleImportCheckboxes));
+
     var manageSection = document.getElementsByClassName('nostyle');
     for (var i = 0; i < manageSection.length; i++) {
         manageSection[i].addEventListener("click", BaseFunction(GoToManageSection, manageSection[i].getAttribute("data")));
@@ -281,7 +284,7 @@ chrome.runtime.onMessage.addListener(function (request, sender) {
 
 function EditPage(location) {
     chrome.tabs.executeScript(null, {
-        file: "js/getPagesSource.js"
+        file: "src/js/getPagesSource.js"
     }, function () {
         // If you try and inject into an extensions page or the webstore/NTP you'll get an error
         if (chrome.runtime.lastError) {
@@ -289,6 +292,24 @@ function EditPage(location) {
         }
     });
 
+}
+
+//redirects to api/entities
+function ToggleImportCheckboxes(location) {
+	if(!location.href.includes("/admin/importexport"))
+	{
+        alert("This tool is intended for use on the import export page (link is on the right side)");
+        return;
+    }
+
+	    chrome.tabs.executeScript(null, {
+        file: "src/js/toggleImportExport.js"
+    }, function () {
+        // If you try and inject into an extensions page or the webstore/NTP you'll get an error
+        if (chrome.runtime.lastError) {
+           alert('There was an error injecting script : \n' + chrome.runtime.lastError.message);
+        }
+    });
 }
 
 //clear cache
